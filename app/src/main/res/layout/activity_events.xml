@@ -11,8 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <!-- Your existing UI elements -->
-
     <View
         android:id="@+id/topBar"
         android:layout_width="match_parent"
@@ -48,9 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_event_list"
-        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-        app:behavior_hideable="true"
-        app:behavior_peekHeight="100dp">
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior" >
 
         <LinearLayout
             android:layout_width="match_parent"
