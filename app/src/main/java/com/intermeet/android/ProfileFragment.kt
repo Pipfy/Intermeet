@@ -1,6 +1,7 @@
 package com.intermeet.android
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import com.bumptech.glide.Glide
@@ -52,6 +54,7 @@ class ProfileFragment : Fragment() {
 
         // ValueEventListener to read the "firstName" and "photoDownloadURLs" data
         userRef.addValueEventListener(object : ValueEventListener {
+            @RequiresApi(Build.VERSION_CODES.O)
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // Get the value of "firstName"
                 val userData = dataSnapshot.getValue(UserData::class.java)
@@ -65,10 +68,12 @@ class ProfileFragment : Fragment() {
 
                     // Setting profile photo if available
                     user.photoDownloadUrls?.firstOrNull()?.let { url ->
-                        Glide.with(this@ProfileFragment)
-                            .load(url)
-                            .circleCrop()
-                            .into(ivUserProfilePhoto)
+                        if (isAdded) { // Check if the fragment is currently added to an activity
+                            Glide.with(this@ProfileFragment)
+                                .load(url)
+                                .circleCrop()
+                                .into(ivUserProfilePhoto)
+                        }
                     }
                 }
             }
@@ -103,6 +108,16 @@ class ProfileFragment : Fragment() {
             }
             startActivity(intent)
         }
+        val tipCenterButton : Button = view.findViewById(R.id.tipCenter)
+        tipCenterButton.setOnClickListener {
+            val intent = Intent(activity, TipCenter::class.java)
+            startActivity(intent)
+        }
+        val helpCenterButton : Button = view.findViewById(R.id.helpCeter)
+        helpCenterButton.setOnClickListener {
+            val intent = Intent(activity, HelpCenterActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 
@@ -125,6 +140,7 @@ class ProfileFragment : Fragment() {
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun calculateAge(birthday: String?): Int {
         // Implement logic to calculate age based on birthday
         // Example: Parse birthday string, calculate age based on current date, and return age

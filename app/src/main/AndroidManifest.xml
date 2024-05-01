@@ -43,6 +43,9 @@
             android:name=".SchoolActivity"
             android:exported="false" />
         <activity
+            android:name=".DiscoverActivity"
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
@@ -113,6 +116,14 @@
         </activity>
         <activity
             android:name=".EditProfile"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".TipCenter"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".HelpCenterActivity"
             android:exported="false">
         </activity>
 
